@@ -1,9 +1,15 @@
 import "./App.css";
+import CreateColumn from "./components/createColumn";
+import NavBar from './components/navBar';
+import TaskDetails from "./components/taskDetails";
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-[100px]">hello world!</h1>
+    <div className="bg-black">
+      {/* <NavBar />
+      <CreateColumn /> */}
+      <TaskDetails />
+
     </div>
   );
 }

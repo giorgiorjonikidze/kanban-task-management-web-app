@@ -7,3 +7,7 @@
     font-family: "jakarta";
     src: url(./assets/fonts/Plus_Jakarta_Sans/PlusJakartaSans-VariableFont_wght.ttf);
 }
+
+body{
+    font-family: jakarta;
+}
