@@ -13,7 +13,9 @@ module.exports = {
       'grey': "#3E3F4E",
       'light_grey': "#828FA3",
       'light': "#E4EBFA",
-      'white': "#ffffff"
+      'white': "#ffffff",
+      'red': "#EA5555",
+      'light_red': "#FF9898"
     },
     fontSize: {
       sm: "12px",
