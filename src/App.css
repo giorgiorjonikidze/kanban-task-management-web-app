@@ -24,3 +24,14 @@ body{
     opacity: 0.5;
   }
 
+  /* .menuItem:hover {
+    transition-property: opacity;
+    transition-delay: 3s;
+    
+    justify-content: flex-end;
+} */
+
+.itemSelf:hover{
+    transform: translateX(20px);
+    transition: all 1000ms;
+}

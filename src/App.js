@@ -12,13 +12,13 @@ function App() {
   return (
     <div className="bg-black ">
       <NavBar />
-      <CreateColumn />
+      {/* <CreateColumn /> */}
       {/* <TaskDetails /> */}
-      {/* <AddTaskModal /> */}
+      <AddTaskModal />
       {/* <Substasks /> */}
       {/* <AddNewBoard /> */}
       {/* <Delete /> */}
-      <BoardList />
+      {/* <BoardList /> */}
 
     </div>
   );
