@@ -1,14 +1,19 @@
 import cross from "../../assets/icon-cross.svg";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { taskActions } from "../../store/store";
 
 const AddTaskModal = () => {
-  const { register, handleSubmit, errors } = useForm();
-  const [subtasks, setSubtasks] = useState([0, 1, 2, 3, 4, 5, 6,]);
+  const { register, handleSubmit, errors, unregister } = useForm();
+  const [subtasks, setSubtasks] = useState([0, 1]);
+  const dispatch = useDispatch();
+  const newTask = useSelector((state) => state.tasks);
+  // console.log(newTask, 'newtask')
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(e.target.value);
+  const onSubmit = (data) => {
+    data["id"] = Math.random().toString(36).substr(2, 9);
+    dispatch(taskActions.createNewTask(data));
   };
 
   const SubtasksComponents = () => {
@@ -28,16 +33,14 @@ const AddTaskModal = () => {
   };
 
   const addSubtask = () => {
-    setSubtasks([...subtasks, subtasks.length + 1]);
-  }
-  const deleteSubtask = (index) => {
-    const newSubtasks = subtasks.filter((subtaskItem) => subtaskItem!== index);
-    setSubtasks(newSubtasks);
-  }
- 
+    setSubtasks([...subtasks, Math.random().toString(36).substr(2, 9)]);
+  };
 
-  
-  
+  const deleteSubtask = (index) => {
+    const newSubtasks = subtasks.filter((subtaskItem) => subtaskItem !== index);
+    setSubtasks(newSubtasks);
+    unregister("subtask" + index);
+  };
 
   return (
     <div>
@@ -47,7 +50,7 @@ const AddTaskModal = () => {
           Add New Task
         </p>
 
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {/* title input ///////////////////// */}
           <div className="flex flex-col mb-[24px]">
             <label className="font-bold text-[12px] text-light_grey mb-[8px]">
@@ -58,6 +61,7 @@ const AddTaskModal = () => {
               className="px-[16px] py-[8px] border-solid border-[1px] border-light_grey rounded-[4px] border-opacity-25 placeholder:text-[13px] placeholder:opacity-50"
               type="text"
               placeholder="e.g. Take coffee break"
+              required
             />
           </div>
           {/* Description input  //////////////////////////////// */}
@@ -78,6 +82,7 @@ const AddTaskModal = () => {
             15 minute break will  recharge the batteries 
             a little."
               className=" min-h-[112px] px-[16px] py-[8px] border-solid border-[1px] border-light_grey rounded-[4px] border-opacity-25 placeholder:text-[13px] placeholder:opacity-50 mb-[24px]"
+              required
             ></textarea>
           </div>
           {/* subtasks //////////////////////  */}
@@ -87,7 +92,11 @@ const AddTaskModal = () => {
               Subtasks
             </p>
             <SubtasksComponents />
-            <button onClick={addSubtask} className="bg-purple bg-opacity-10 py-[10px] text-purple font-bold text-[13px] rounded-[20px] mb-[24px]">
+            <button
+              type="button"
+              onClick={addSubtask}
+              className="bg-purple bg-opacity-10 py-[10px] text-purple font-bold text-[13px] rounded-[20px] mb-[24px]"
+            >
               + Add New Subtask
             </button>
           </div>
@@ -95,11 +104,10 @@ const AddTaskModal = () => {
             Status
           </p>
           <select
-            name=""
-            id=""
+            {...register("status")}
             className="w-full border-[1px] border-solid border-light_grey box-border px-[16px] py-[8px] rounded-[4px] border-opacity-25 mb-[24px]"
           >
-            <option value="">Doing</option>
+            <option value="doing">Doing</option>
           </select>
           <button
             type="submit"

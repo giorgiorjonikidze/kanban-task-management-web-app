@@ -14,9 +14,9 @@ function App() {
       <NavBar />
       {/* <CreateColumn /> */}
       {/* <TaskDetails /> */}
-      <AddTaskModal />
+      {/* <AddTaskModal /> */}
       {/* <Substasks /> */}
-      {/* <AddNewBoard /> */}
+      <AddNewBoard />
       {/* <Delete /> */}
       {/* <BoardList /> */}
 
